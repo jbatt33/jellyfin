@@ -8,13 +8,11 @@ using MediaBrowser.Model.Entities;
 
 namespace MediaBrowser.Controller.Collections
 {
-    public sealed class CollectionCreationOptions : IHasProviderIds
+    public class CollectionCreationOptions : IHasProviderIds
     {
-        private Dictionary<string, string> _providerIds;
-
         public CollectionCreationOptions()
         {
-            _providerIds = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            ProviderIds = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             ItemIdList = Array.Empty<string>();
             UserIds = Array.Empty<Guid>();
         }
@@ -25,14 +23,7 @@ namespace MediaBrowser.Controller.Collections
 
         public bool IsLocked { get; set; }
 
-        // private implementation of ProviderIds property from interface to allow setter access
-        Dictionary<string, string> IHasProviderIds.ProviderIds
-        {
-            get => _providerIds;
-            set => _providerIds = value;
-        }
-
-        public Dictionary<string, string> ProviderIds { get => _providerIds; }
+        public Dictionary<string, string> ProviderIds { get; set; }
 
         public IReadOnlyList<string> ItemIdList { get; set; }
 
